@@ -528,7 +528,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('displayTime').innerText = document.getElementById('inputTime').value;
       document.getElementById('displayVenue').innerText = document.getElementById('inputVenue').value;
       document.getElementById('displayLocation').innerText = document.getElementById('inputLocation').value;
-      document.getElementById('displayDressCode').innerText = document.getElementById('inputDressCode').value;
+      if (document.getElementById('displayDressCode') && document.getElementById('inputDressCode')) {
+        document.getElementById('displayDressCode').innerText = document.getElementById('inputDressCode').value;
+      }
 
       document.getElementById('mapVenueTitle').innerText = document.getElementById('inputVenue').value;
       document.getElementById('mapVenueAddress').innerText = document.getElementById('inputLocation').value;
