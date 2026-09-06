@@ -393,10 +393,8 @@ document.addEventListener('DOMContentLoaded', () => {
     isPlaying = true;
     initAudioContext();
 
-    // Trigger YouTube background music if URL input is filled
-    const ytUrlInput = document.getElementById('inputYoutubeUrl');
-    const songUrl = (ytUrlInput && ytUrlInput.value) ? ytUrlInput.value : 'https://youtu.be/bXa-wbiXiOw?si=BkU1fQEBroNPAun5';
-    playYouTubeBackgroundMusic(songUrl, true);
+    // Trigger YouTube background music
+    playYouTubeBackgroundMusic('bXa-wbiXiOw', true);
 
     // 1. Hide tap callout overlay
     tapOverlay.classList.add('fade-out');
@@ -545,11 +543,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- YouTube Background Music Player Engine ---
-  let currentYoutubeVideoId = '';
-  let ytPlayerIframe = null;
+  let currentYoutubeVideoId = 'bXa-wbiXiOw';
+  let ytPlayerIframe = document.getElementById('ytIframe');
 
   function extractYouTubeId(url) {
-    if (!url) return '';
+    if (!url) return 'bXa-wbiXiOw';
     url = url.trim();
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
@@ -557,55 +555,74 @@ document.addEventListener('DOMContentLoaded', () => {
       return match[2];
     }
     if (url.length === 11) return url;
-    return '';
+    return 'bXa-wbiXiOw';
   }
 
-  function playYouTubeBackgroundMusic(url, autoPlay = true) {
-    const videoId = extractYouTubeId(url);
-    if (!videoId) return;
-    currentYoutubeVideoId = videoId;
-    const container = document.getElementById('youtubePlayerContainer');
-    if (!container) return;
-
-    const mute = isAudioMuted ? 1 : 0;
-    const playParam = autoPlay ? 1 : 0;
-    container.innerHTML = `<iframe id="ytIframe" width="200" height="200" 
-      src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=${playParam}&loop=1&playlist=${videoId}&controls=0&mute=${mute}" 
-      frameborder="0" allow="autoplay"></iframe>`;
-
-    ytPlayerIframe = document.getElementById('ytIframe');
-  }
-
-  function toggleYouTubeAudioMute(isMuted) {
+  function sendYtCommand(func, args = []) {
+    ytPlayerIframe = ytPlayerIframe || document.getElementById('ytIframe');
     if (!ytPlayerIframe || !ytPlayerIframe.contentWindow) return;
-    const command = isMuted ? 'mute' : 'unMute';
     try {
       ytPlayerIframe.contentWindow.postMessage(JSON.stringify({
         event: 'command',
-        func: command,
-        args: []
+        func: func,
+        args: args
       }), '*');
     } catch (e) {
-      console.warn('YouTube audio command postMessage exception:', e);
+      console.warn('YouTube postMessage error:', e);
+    }
+  }
+
+  function playYouTubeBackgroundMusic(url = 'bXa-wbiXiOw', autoPlay = true) {
+    const videoId = extractYouTubeId(url);
+    currentYoutubeVideoId = videoId;
+    ytPlayerIframe = document.getElementById('ytIframe');
+    const container = document.getElementById('youtubePlayerContainer');
+    
+    if (!ytPlayerIframe && container) {
+      const mute = isAudioMuted ? 1 : 0;
+      const playParam = autoPlay ? 1 : 0;
+      const origin = encodeURIComponent(window.location.origin);
+      container.innerHTML = `<iframe id="ytIframe" width="1" height="1" 
+        src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=${playParam}&loop=1&playlist=${videoId}&controls=0&mute=${mute}&origin=${origin}&playsinline=1" 
+        frameborder="0" allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
+      ytPlayerIframe = document.getElementById('ytIframe');
+    }
+
+    if (!isAudioMuted && autoPlay) {
+      sendYtCommand('unMute');
+      sendYtCommand('setVolume', [100]);
+      sendYtCommand('playVideo');
+    }
+  }
+
+  function toggleYouTubeAudioMute(isMuted) {
+    if (isMuted) {
+      sendYtCommand('mute');
+    } else {
+      sendYtCommand('unMute');
+      sendYtCommand('setVolume', [100]);
+      sendYtCommand('playVideo');
     }
   }
 
   // --- Audio Mute Toggle ---
-  audioToggleBtn.addEventListener('click', () => {
-    isAudioMuted = !isAudioMuted;
-    video.muted = isAudioMuted;
-    
-    toggleYouTubeAudioMute(isAudioMuted);
+  if (audioToggleBtn) {
+    audioToggleBtn.addEventListener('click', () => {
+      isAudioMuted = !isAudioMuted;
+      video.muted = isAudioMuted;
+      
+      toggleYouTubeAudioMute(isAudioMuted);
 
-    if (isAudioMuted) {
-      audioIconOn.classList.add('hidden');
-      audioIconOff.classList.remove('hidden');
-    } else {
-      audioIconOn.classList.remove('hidden');
-      audioIconOff.classList.add('hidden');
-      initAudioContext();
-    }
-  });
+      if (isAudioMuted) {
+        audioIconOn.classList.add('hidden');
+        audioIconOff.classList.remove('hidden');
+      } else {
+        audioIconOn.classList.remove('hidden');
+        audioIconOff.classList.add('hidden');
+        initAudioContext();
+      }
+    });
+  }
 
   // --- Map Modal Controls ---
   openMapBtn.addEventListener('click', () => mapModal.classList.remove('hidden'));
