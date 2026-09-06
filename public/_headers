@@ -1,0 +1,23 @@
+# Cloudflare Pages Headers Configuration
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Caching for Video Assets
+/assets/doors/*.mp4
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Caching for Images & WebP/AVIF
+/assets/doors/*.avif
+  Cache-Control: public, max-age=31536000, immutable
+/assets/doors/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+/assets/doors/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+# Service Worker
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
