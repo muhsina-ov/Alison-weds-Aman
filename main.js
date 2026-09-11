@@ -413,8 +413,9 @@ document.addEventListener('DOMContentLoaded', () => {
     posterImg.classList.add('fade-out');
     staticCanvas.classList.remove('active');
     
-    // 3. Reset video playback to 0 and play continuous single-motion video
+    // 3. Reset video playback to 0, slow down playback rate for grand cinematic pacing
     video.currentTime = 0;
+    video.playbackRate = 0.75; // Slower, regal architectural opening
 
     const playPromise = video.play();
     if (playPromise !== undefined) {
@@ -438,14 +439,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Video Event Listeners ---
   video.addEventListener('timeupdate', () => {
-    // Reveal floating sky lanterns at 6th second of video playback
-    if (video.currentTime >= 6.0) {
-      const lanternsContainer = document.getElementById('lanternsContainer');
-      if (lanternsContainer) lanternsContainer.classList.add('revealed');
+    // Reveal lanterns with increased intensity as door opens
+    const lanternsContainer = document.getElementById('lanternsContainer');
+    if (lanternsContainer && !lanternsContainer.classList.contains('revealed')) {
+      lanternsContainer.classList.add('revealed');
     }
 
-    // Trigger fade-in reveal starting from 6th second of video playback
-    if (!hasOpened && (video.currentTime >= 6.0 || video.ended)) {
+    // Trigger invitation reveal near video completion for a grand, slow cinematic transition
+    if (!hasOpened && (video.currentTime >= 8.5 || video.ended)) {
       revealInvitationContent();
     }
   });
@@ -464,6 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     video.pause();
     video.currentTime = 0;
+    video.playbackRate = 0.75;
     
     staticCanvas.classList.remove('active');
     invitationOverlay.classList.remove('revealed');
@@ -665,7 +667,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const groom = document.getElementById('displayGroom') ? document.getElementById('displayGroom').innerText : "Aman";
 
       const title = encodeURIComponent(`Wedding Festivities of ${bride} & ${groom}`);
-      const details = encodeURIComponent(`Join us to celebrate the wedding festivities of ${bride} and ${groom} in Mumbai.\n\nEvents Schedule:\n- Sagai, Spirits & Soirée: Friday, Jan 22, 2027 @ Prince Hall, NSCI, Worli\n- Baraat: Sunday, Jan 24, 2027 (11:00 AM onwards) @ The Orchid, Mumbai\n- Jaimala: Sunday, Jan 24, 2027 (12:30 PM) @ The Orchid, Mumbai\n- Wedding Ceremony & Pheras: Sunday, Jan 24, 2027 (1:00 PM onwards) @ Prive Hall, The Orchid, Mumbai`);
+      const details = encodeURIComponent(`Join us to celebrate the wedding festivities of ${bride} and ${groom} in Mumbai.\n\nEvents Schedule:\n- Sagai, Spirits & Soirée: Friday, Jan 22, 2027 (6:00 PM onwards) @ Prince Hall, NSCI, Worli\n- Baraat: Sunday, Jan 24, 2027 (11:00 AM onwards) @ The Orchid, Mumbai\n- Jaimala: Sunday, Jan 24, 2027 (12:30 PM) @ The Orchid, Mumbai\n- Wedding Ceremony & Pheras: Sunday, Jan 24, 2027 (1:00 PM onwards) @ Prive Hall, The Orchid, Mumbai\n- Reception: Sunday, Jan 24, 2027 (Evening onwards) @ Prince Hall, NSCI, Worli`);
       const loc = encodeURIComponent(`The Orchid, Mumbai & Prince Hall, NSCI, Worli`);
 
       const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${loc}&dates=20270124T053000Z/20270124T170000Z`;

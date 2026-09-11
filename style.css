@@ -247,8 +247,8 @@ html, body {
   z-index: 5;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0;
-  transition: opacity 1.5s ease;
+  opacity: 0.75;
+  transition: opacity 2s ease;
 }
 
 .floating-lanterns-container.revealed {
@@ -1721,20 +1721,27 @@ html, body {
 }
 
 .event-card {
-  background: rgba(18, 18, 24, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(229, 193, 88, 0.2);
-  border-radius: 16px;
-  padding: 16px 18px;
+  background: rgba(18, 18, 24, 0.72);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(229, 193, 88, 0.28);
+  border-radius: 18px;
+  padding: 18px 20px;
   text-align: left;
   position: relative;
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  border-color: rgba(229, 193, 88, 0.5);
+  box-shadow: 0 8px 30px rgba(229, 193, 88, 0.18);
+  transform: translateY(-2px);
 }
 
 .event-card.highlight {
-  background: rgba(229, 193, 88, 0.08);
-  border-color: var(--color-gold);
-  box-shadow: 0 4px 20px rgba(229, 193, 88, 0.15);
+  background: rgba(18, 18, 24, 0.72);
+  border: 1px solid rgba(229, 193, 88, 0.35);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
 }
 
 .event-badge {
@@ -1746,15 +1753,16 @@ html, body {
   color: var(--color-gold-light);
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(229, 193, 88, 0.3);
-  padding: 3px 8px;
-  border-radius: 12px;
-  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
 .event-badge.gold {
-  background: var(--color-gold-gradient);
-  color: #0a0a0c;
-  border: none;
+  color: var(--color-gold-light);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(229, 193, 88, 0.3);
 }
 
 .event-title {
