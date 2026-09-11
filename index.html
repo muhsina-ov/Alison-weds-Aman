@@ -3,32 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Mithun Weds Ann Mariya — Digital Wedding Invitation</title>
+  <title>Alison Weds Aman — Digital Wedding Invitation</title>
   
   <!-- Primary SEO Meta Tags -->
-  <meta name="title" content="Mithun Weds Ann Mariya — Digital Wedding Invitation">
-  <meta name="description" content="Mithun & Ann Mariya invite you to celebrate their wedding on Friday, Oct 23, 2026 at Sub Registrar Office, Kazhakkuttam.">
-  <meta name="keywords" content="Mithun Ann Mariya wedding, digital wedding invitation, luxury wedding invite, animated wedding invitation, cinematic wedding invite">
-  <meta name="author" content="Mithun & Ann Mariya">
+  <meta name="title" content="Alison Weds Aman — Digital Wedding Invitation">
+  <meta name="description" content="Alison O'Reilly & Aman Mishra invite you to celebrate their wedding celebrations from Jan 22 to Jan 24, 2027 in Mumbai.">
+  <meta name="keywords" content="Alison O'Reilly, Aman Mishra, Alison Aman wedding, digital wedding invitation, luxury wedding invite, Mumbai wedding invitation">
+  <meta name="author" content="Alison & Aman">
   <meta name="theme-color" content="#0a0a0f">
 
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mithun-weds-annmariya.invitingyou.top/">
-  <meta property="og:title" content="Mithun Weds Ann Mariya — Digital Wedding Invitation">
-  <meta property="og:description" content="Mithun & Ann Mariya invite you to celebrate their wedding on Friday, Oct 23, 2026 at Sub Registrar Office, Kazhakkuttam.">
-  <meta property="og:image" content="https://mithun-weds-annmariya.invitingyou.top/og-image.jpg?v=2">
+  <meta property="og:url" content="https://alison-weds-aman.invitingyou.top/">
+  <meta property="og:title" content="Alison Weds Aman — Digital Wedding Invitation">
+  <meta property="og:description" content="Alison O'Reilly & Aman Mishra invite you to celebrate their wedding celebrations from Jan 22 to Jan 24, 2027 in Mumbai.">
+  <meta property="og:image" content="./og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Mithun Weds Ann Mariya Wedding Invitation Preview">
-  <meta property="og:site_name" content="Mithun & Ann Mariya Wedding">
+  <meta property="og:image:alt" content="Alison Weds Aman Wedding Invitation Preview">
+  <meta property="og:site_name" content="Alison & Aman Wedding">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://mithun-weds-annmariya.invitingyou.top/">
-  <meta name="twitter:title" content="Mithun Weds Ann Mariya — Digital Wedding Invitation">
-  <meta name="twitter:description" content="Mithun & Ann Mariya invite you to celebrate their wedding on Friday, Oct 23, 2026 at Sub Registrar Office, Kazhakkuttam.">
-  <meta name="twitter:image" content="https://mithun-weds-annmariya.invitingyou.top/og-image.jpg?v=2">
+  <meta name="twitter:url" content="https://alison-weds-aman.invitingyou.top/">
+  <meta name="twitter:title" content="Alison Weds Aman — Digital Wedding Invitation">
+  <meta name="twitter:description" content="Alison O'Reilly & Aman Mishra invite you to celebrate their wedding celebrations from Jan 22 to Jan 24, 2027 in Mumbai.">
+  <meta name="twitter:image" content="./og-image.jpg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,14 +39,17 @@
   <link rel="preload" href="./assets/doors/1.avif" as="image" type="image/avif" fetchpriority="high">
   <link rel="preload" href="./assets/doors/1.mp4" as="video" type="video/mp4">
 
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <!-- Ambient Desktop Background -->
   <div class="ambient-backdrop" id="ambientBackdrop"></div>
 
-  <!-- Background YouTube Music Player Container -->
+  <!-- Background Audio Player Container -->
   <div id="youtubePlayerContainer" class="youtube-player-container">
+    <audio id="bgmAudio" loop preload="auto">
+      <source src="./assets/bgm.mp3" type="audio/mp3">
+    </audio>
     <iframe id="ytIframe" width="1" height="1"
       src="https://www.youtube.com/embed/bXa-wbiXiOw?enablejsapi=1&autoplay=1&mute=0&loop=1&playlist=bXa-wbiXiOw&controls=0&playsinline=1"
       frameborder="0"
@@ -56,7 +59,7 @@
   <!-- Top Floating Controls (Guest Experience) -->
   <header class="top-controls">
     <div class="brand-tag">
-      <span class="sparkle">✦</span> Mithun & Ann Mariya
+      <span class="sparkle">✦</span> Alison & Aman
     </div>
     <div class="action-pills">
       <button id="audioToggleBtn" class="glass-pill-btn icon-only" title="Toggle Sound">
@@ -73,11 +76,11 @@
       <!-- Video & Image Layers (Pure Architecture, NO text overlaid on video) -->
       <div class="media-stage" id="mediaStage">
         <!-- High-res Static Poster Image for instant load -->
-        <img id="doorPoster" src="/assets/doors/1.avif" alt="Architectural Door Cover" class="door-media poster-image active" fetchpriority="high" decoding="async">
+        <img id="doorPoster" src="./assets/doors/1.avif" alt="Architectural Door Cover" class="door-media poster-image active" fetchpriority="high" decoding="async">
         
         <!-- Video Layer for physical opening animation -->
         <video id="doorVideo" class="door-media video-player" playsinline webkit-playsinline preload="auto" muted>
-          <source id="videoSource" src="/assets/doors/1.mp4" type="video/mp4">
+          <source id="videoSource" src="./assets/doors/1.mp4" type="video/mp4">
         </video>
         
         <!-- Freeze Frame Canvas for 100% static hold at video completion -->
@@ -125,18 +128,22 @@
             TOGETHER WITH OUR FAMILIES
           </p>
 
-          <!-- Groom & Bride Names -->
+          <!-- Bride & Groom Names with Parents Info -->
           <div class="couple-names-block animate-element" style="--delay: 0.35s;">
-            <h1 class="groom-name" id="displayGroom">Mithun</h1>
+            <h1 class="groom-name" id="displayBride">Alison O’Reilly</h1>
+            <p class="parent-lineage">D/O Caroline &amp; Paul O’Reilly</p>
+            
             <div class="ampersand-wrapper">
-              <span class="ampersand">&</span>
+              <span class="ampersand">&amp;</span>
             </div>
-            <h1 class="bride-name" id="displayBride">Ann Mariya</h1>
+            
+            <h1 class="bride-name" id="displayGroom">Aman Mishra</h1>
+            <p class="parent-lineage">S/O Usha &amp; Krishnakant Mishra</p>
           </div>
 
           <!-- Announcement -->
           <p class="invitation-tagline animate-element" style="--delay: 0.5s;" id="displayTagline">
-            REQUEST YOUR LOVING PRAYERS AND BLESSINGS AS WE STEP INTO THIS NEW JOURNEY TOGETHER
+            CORDIALLY INVITE YOU TO CELEBRATE THEIR WEDDING FESTIVITIES IN MUMBAI
           </p>
 
           <div class="gold-separator animate-element" style="--delay: 0.6s;"></div>
@@ -146,13 +153,13 @@
             <div class="scratch-card-container" id="scratchContainer">
               <!-- Underneath Date Card -->
               <div class="date-time-card" id="dateTimeCard">
-                <div class="date-day" id="displayDay">FRIDAY</div>
+                <div class="date-day" id="displayDay">SUNDAY</div>
                 <div class="date-main">
-                  <span class="date-month" id="displayMonth">OCTOBER</span>
-                  <span class="date-num" id="displayDateNum">23</span>
-                  <span class="date-year" id="displayYear">2026</span>
+                  <span class="date-month" id="displayMonth">JANUARY</span>
+                  <span class="date-num" id="displayDateNum">24</span>
+                  <span class="date-year" id="displayYear">2027</span>
                 </div>
-                <div class="date-time" id="displayTime">AT 11:00 AM</div>
+                <div class="date-time" id="displayTime">11:00 AM ONWARDS</div>
               </div>
               
               <!-- Gold Scratch Foil Canvas -->
@@ -172,6 +179,7 @@
 
           <!-- Live Countdown Row -->
           <div class="countdown-section animate-element" style="--delay: 0.8s;">
+            <div class="countdown-label">COUNTDOWN TO THE CELEBRATION</div>
             <div class="countdown-grid" id="countdownGrid">
               <div class="countdown-pill">
                 <span class="countdown-num" id="cdDays">00</span>
@@ -192,18 +200,87 @@
             </div>
           </div>
 
-          <!-- Venue & Location Block -->
-          <div class="venue-block animate-element" style="--delay: 0.9s;">
-            <h3 class="venue-name" id="displayVenue">Sub Registrar Office</h3>
-            <p class="venue-location" id="displayLocation">Kazhakkuttam, Thiruvananthapuram</p>
+          <!-- Multi-Events Timeline Block -->
+          <div class="events-timeline-section animate-element" style="--delay: 0.9s;">
+            <h3 class="section-title">✦ WEDDING CELEBRATIONS &amp; SCHEDULE ✦</h3>
+            
+            <div class="events-grid">
+              <!-- Event 1: Sagai, Spirits & Soirée -->
+              <div class="event-card">
+                <div class="event-badge">PRE-WEDDING SOIRÉE</div>
+                <h4 class="event-title">Sagai, Spirits &amp; Soirée</h4>
+                <div class="event-datetime">
+                  <span>📅 Friday, 22nd Jan 2027</span>
+                  <span>⏰ Evening Onwards</span>
+                </div>
+                <div class="event-venue">
+                  <strong>Prince Hall, NSCI, Worli</strong>
+                  <p>National Sports Club of India, Lala Lajpatrai Marg, Worli, Mumbai 400018</p>
+                </div>
+                <a href="https://maps.app.goo.gl/na3CW3jiCcw7EPBq9" target="_blank" rel="noopener noreferrer" class="event-map-btn">
+                  📍 Google Maps
+                </a>
+              </div>
+
+              <!-- Event 2: Baraat -->
+              <div class="event-card">
+                <div class="event-badge">PROCESSION</div>
+                <h4 class="event-title">Baraat</h4>
+                <div class="event-datetime">
+                  <span>📅 Sunday, 24th Jan 2027</span>
+                  <span>⏰ 11:00 AM Onwards</span>
+                </div>
+                <div class="event-venue">
+                  <strong>The Orchid, Mumbai</strong>
+                  <p>T1, 70-C, Nehru Rd, Near CSM International Airport, Vile Parle East, Mumbai 400099</p>
+                </div>
+                <a href="https://maps.app.goo.gl/pTLN7wmCEnRC64nw5" target="_blank" rel="noopener noreferrer" class="event-map-btn">
+                  📍 Google Maps
+                </a>
+              </div>
+
+              <!-- Event 3: Jaimala -->
+              <div class="event-card">
+                <div class="event-badge gold">GARLAND CEREMONY</div>
+                <h4 class="event-title">Jaimala</h4>
+                <div class="event-datetime">
+                  <span>📅 Sunday, 24th Jan 2027</span>
+                  <span>⏰ 12:30 PM</span>
+                </div>
+                <div class="event-venue">
+                  <strong>The Orchid, Mumbai</strong>
+                  <p>T1, 70-C, Nehru Rd, Near CSM International Airport, Vile Parle East, Mumbai 400099</p>
+                </div>
+                <a href="https://maps.app.goo.gl/pTLN7wmCEnRC64nw5" target="_blank" rel="noopener noreferrer" class="event-map-btn">
+                  📍 Google Maps
+                </a>
+              </div>
+
+              <!-- Event 4: Wedding Ceremony & Pheras -->
+              <div class="event-card highlight">
+                <div class="event-badge gold">SACRED VOWS</div>
+                <h4 class="event-title">Wedding Ceremony &amp; Pheras</h4>
+                <div class="event-datetime">
+                  <span>📅 Sunday, 24th Jan 2027</span>
+                  <span>⏰ 1:00 PM Onwards</span>
+                </div>
+                <div class="event-venue">
+                  <strong>Prive Hall, The Orchid, Mumbai</strong>
+                  <p>T1, 70-C, Nehru Rd, Near CSM International Airport, Vile Parle East, Mumbai 400099</p>
+                </div>
+                <a href="https://maps.app.goo.gl/pTLN7wmCEnRC64nw5" target="_blank" rel="noopener noreferrer" class="event-map-btn">
+                  📍 Google Maps
+                </a>
+              </div>
+            </div>
           </div>
 
           <!-- Verse / Quote Section -->
           <div class="quote-section animate-element" style="--delay: 1.1s;">
             <p class="story-quote">
-              “From this moment forward, we walk hand in hand through life, love, and every tomorrow.”
+              “Two hearts, two souls, united in love and beginning a beautiful lifetime together.”
             </p>
-            <span class="story-ref">— A Celebration of Love</span>
+            <span class="story-ref">— Alison &amp; Aman</span>
           </div>
 
           <!-- Action Buttons Grid -->
@@ -215,7 +292,7 @@
 
             <button class="secondary-glass-btn" id="openMapBtn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Location</span>
+              <span>View Venues</span>
             </button>
           </div>
 
@@ -232,29 +309,37 @@
     </div>
   </main>
 
-  <!-- Venue Location Map Modal -->
+  <!-- Dual Venue Location Map Modal -->
   <div class="modal-backdrop hidden" id="mapModal">
     <div class="modal-card map-card">
       <div class="modal-header">
-        <h2>Venue Location</h2>
+        <h2>Wedding Venues &amp; Maps</h2>
         <button class="close-modal-btn" id="closeMapModal">&times;</button>
       </div>
       <div class="map-body">
-        <div class="location-details">
-          <h3 id="mapVenueTitle">Sub Registrar Office</h3>
-          <p id="mapVenueAddress">Kazhakkuttam, Thiruvananthapuram</p>
+        
+        <!-- Venue 1 Card: The Orchid -->
+        <div class="venue-modal-card">
+          <div class="venue-modal-badge">BARAAT, JAIMALA &amp; WEDDING CEREMONY</div>
+          <h3>The Orchid, Mumbai (Prive Hall)</h3>
+          <p class="venue-address">T1, 70-C, Nehru Rd, Near Chhatrapati Shivaji Maharaj International Airport, Navpada, Vile Parle East, Mumbai 400099</p>
+          <a href="https://maps.app.goo.gl/pTLN7wmCEnRC64nw5" target="_blank" rel="noopener noreferrer" class="primary-gold-btn full-width text-center margin-top">
+            Open Orchid Hotel in Maps ↗
+          </a>
         </div>
-        <div class="map-mockup">
-          <div class="map-grid-pattern"></div>
-          <div class="map-pin">
-            <div class="pin-pulse"></div>
-            <div class="pin-head">📍</div>
-          </div>
-          <span class="map-label">Sub Registrar Office Kazhakkuttam</span>
+
+        <div class="venue-divider">✦ ✦ ✦</div>
+
+        <!-- Venue 2 Card: Prince Hall, NSCI -->
+        <div class="venue-modal-card">
+          <div class="venue-modal-badge">SAGAI, SPIRITS &amp; SOIRÉE</div>
+          <h3>Prince Hall, NSCI, Worli</h3>
+          <p class="venue-address">National Sports Club of India, Lala Lajpatrai Marg, Lotus Colony, Worli, Mumbai 400018</p>
+          <a href="https://maps.app.goo.gl/na3CW3jiCcw7EPBq9" target="_blank" rel="noopener noreferrer" class="primary-gold-btn full-width text-center margin-top">
+            Open NSCI Worli in Maps ↗
+          </a>
         </div>
-        <a href="https://share.google/vZIT3ol2zIpQrLjcF" target="_blank" rel="noopener noreferrer" class="primary-gold-btn full-width text-center">
-          Open in Google Maps ↗
-        </a>
+
       </div>
     </div>
   </div>
@@ -263,6 +348,3 @@
 </body>
 </html>
 
-  <script type="module" src="./main.js"></script>
-</body>
-</html>

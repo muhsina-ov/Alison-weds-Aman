@@ -1,3 +1,5 @@
+import './style.css';
+
 /* ==========================================================================
    PREMIUM CINEMATIC DIGITAL WEDDING INVITATION - LOGIC & ANIMATION ENGINE
    ========================================================================== */
@@ -333,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cdMins = document.getElementById('cdMins');
   const cdSecs = document.getElementById('cdSecs');
   
-  const targetWeddingDate = new Date('October 23, 2026 11:00:00').getTime();
+  const targetWeddingDate = new Date('January 24, 2027 12:00:00').getTime();
 
   function updateCountdown() {
     if (!cdDays || !cdHours || !cdMins || !cdSecs) return;
@@ -392,6 +394,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     isPlaying = true;
     initAudioContext();
+
+    // Trigger HTML5 Background Music (Instagram reel audio)
+    const bgmAudio = document.getElementById('bgmAudio');
+    if (bgmAudio) {
+      bgmAudio.loop = true;
+      bgmAudio.volume = 1.0;
+      bgmAudio.play().catch(err => console.warn('BGM audio autoplay handled:', err));
+    }
 
     // Trigger YouTube background music
     playYouTubeBackgroundMusic('bXa-wbiXiOw', true);
@@ -615,6 +625,15 @@ document.addEventListener('DOMContentLoaded', () => {
       
       toggleYouTubeAudioMute(isAudioMuted);
 
+      const bgmAudio = document.getElementById('bgmAudio');
+      if (bgmAudio) {
+        if (isAudioMuted) {
+          bgmAudio.pause();
+        } else {
+          bgmAudio.play().catch(err => console.warn('BGM audio play error:', err));
+        }
+      }
+
       if (isAudioMuted) {
         audioIconOn.classList.add('hidden');
         audioIconOff.classList.remove('hidden');
@@ -640,20 +659,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Add to Google Calendar ---
-  addToCalendarBtn.addEventListener('click', () => {
-    const groom = document.getElementById('displayGroom').innerText;
-    const bride = document.getElementById('displayBride').innerText;
-    const venue = document.getElementById('displayVenue').innerText;
-    const location = document.getElementById('displayLocation').innerText;
+  if (addToCalendarBtn) {
+    addToCalendarBtn.addEventListener('click', () => {
+      const bride = document.getElementById('displayBride') ? document.getElementById('displayBride').innerText : "Alison";
+      const groom = document.getElementById('displayGroom') ? document.getElementById('displayGroom').innerText : "Aman";
 
-    const title = encodeURIComponent(`Wedding of ${groom} & ${bride}`);
-    const details = encodeURIComponent(`Join us to celebrate the wedding of ${groom} and ${bride} at ${venue}.`);
-    const loc = encodeURIComponent(`${venue}, ${location}`);
+      const title = encodeURIComponent(`Wedding Festivities of ${bride} & ${groom}`);
+      const details = encodeURIComponent(`Join us to celebrate the wedding festivities of ${bride} and ${groom} in Mumbai.\n\nEvents Schedule:\n- Sagai, Spirits & Soirée: Friday, Jan 22, 2027 @ Prince Hall, NSCI, Worli\n- Baraat: Sunday, Jan 24, 2027 (11:00 AM onwards) @ The Orchid, Mumbai\n- Jaimala: Sunday, Jan 24, 2027 (12:30 PM) @ The Orchid, Mumbai\n- Wedding Ceremony & Pheras: Sunday, Jan 24, 2027 (1:00 PM onwards) @ Prive Hall, The Orchid, Mumbai`);
+      const loc = encodeURIComponent(`The Orchid, Mumbai & Prince Hall, NSCI, Worli`);
 
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${loc}&dates=20261023T053000Z/20261023T110000Z`;
+      const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${loc}&dates=20270124T053000Z/20270124T170000Z`;
 
-    window.open(googleCalendarUrl, '_blank', 'noopener,noreferrer');
-  });
+      window.open(googleCalendarUrl, '_blank', 'noopener,noreferrer');
+    });
+  }
 
   // ==========================================================================
   // HIGH-PERFORMANCE IDLE PREFETCH ENGINE & SERVICE WORKER
