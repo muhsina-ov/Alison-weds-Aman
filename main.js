@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container) return;
 
     container.innerHTML = '';
-    const lanternCount = 22;
+    const lanternCount = 28;
     const depthTiers = ['depth-far', 'depth-far', 'depth-mid', 'depth-mid', 'depth-near'];
 
     for (let i = 0; i < lanternCount; i++) {
@@ -71,8 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
       lantern.className = `lantern-item ${depthClass}`;
 
       const leftPos = (Math.random() * 92 + 4).toFixed(1);
-      const duration = (Math.random() * 14 + 14).toFixed(1);
-      const delay = (Math.random() * 20).toFixed(1);
+      const duration = (Math.random() * 8 + 12).toFixed(1);
+      // Stagger delays including negative offsets so lanterns are already in-flight when door opens
+      const delay = (i % 2 === 0 ? -(Math.random() * 10) : (Math.random() * 6)).toFixed(1);
       const swayX = (Math.random() * 24 + 10).toFixed(0);
       const rotDeg = (Math.random() * 6 - 3).toFixed(1);
 
@@ -395,16 +396,27 @@ document.addEventListener('DOMContentLoaded', () => {
     isPlaying = true;
     initAudioContext();
 
-    // Trigger HTML5 Background Music (Instagram reel audio)
+    // Trigger HTML5 Background Music (Instagram reel audio on loop)
     const bgmAudio = document.getElementById('bgmAudio');
     if (bgmAudio) {
       bgmAudio.loop = true;
       bgmAudio.volume = 1.0;
-      bgmAudio.play().catch(err => console.warn('BGM audio autoplay handled:', err));
+      bgmAudio.play().catch(err => {
+        console.warn('BGM audio autoplay handled:', err);
+        // Fallback user interaction listener if needed
+        document.addEventListener('click', () => {
+          if (!isAudioMuted && bgmAudio.paused) {
+            bgmAudio.play().catch(() => {});
+          }
+        }, { once: true });
+      });
     }
 
-    // Trigger YouTube background music
-    playYouTubeBackgroundMusic('bXa-wbiXiOw', true);
+    // Immediately awaken and reveal floating sky lanterns for the grand entrance
+    const lanternsContainer = document.getElementById('lanternsContainer');
+    if (lanternsContainer) {
+      lanternsContainer.classList.add('revealed');
+    }
 
     // 1. Hide tap callout overlay
     tapOverlay.classList.add('fade-out');
@@ -413,9 +425,9 @@ document.addEventListener('DOMContentLoaded', () => {
     posterImg.classList.add('fade-out');
     staticCanvas.classList.remove('active');
     
-    // 3. Reset video playback to 0, slow down playback rate for grand cinematic pacing
+    // 3. Reset video playback to 0, slow down playback rate for grand cinematic royal pacing
     video.currentTime = 0;
-    video.playbackRate = 0.75; // Slower, regal architectural opening
+    video.playbackRate = 0.58; // Slower, majestic entrance
 
     const playPromise = video.play();
     if (playPromise !== undefined) {
@@ -439,14 +451,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Video Event Listeners ---
   video.addEventListener('timeupdate', () => {
-    // Reveal lanterns with increased intensity as door opens
+    // Ensure lanterns remain revealed with glowing presence
     const lanternsContainer = document.getElementById('lanternsContainer');
     if (lanternsContainer && !lanternsContainer.classList.contains('revealed')) {
       lanternsContainer.classList.add('revealed');
     }
 
-    // Trigger invitation reveal near video completion for a grand, slow cinematic transition
-    if (!hasOpened && (video.currentTime >= 8.5 || video.ended)) {
+    // Trigger invitation reveal near completion of video for a grand, slow transition
+    if (!hasOpened && (video.currentTime >= 8.8 || video.ended)) {
       revealInvitationContent();
     }
   });
@@ -465,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     video.pause();
     video.currentTime = 0;
-    video.playbackRate = 0.75;
+    video.playbackRate = 0.58;
     
     staticCanvas.classList.remove('active');
     invitationOverlay.classList.remove('revealed');
@@ -667,7 +679,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const groom = document.getElementById('displayGroom') ? document.getElementById('displayGroom').innerText : "Aman";
 
       const title = encodeURIComponent(`Wedding Festivities of ${bride} & ${groom}`);
-      const details = encodeURIComponent(`Join us to celebrate the wedding festivities of ${bride} and ${groom} in Mumbai.\n\nEvents Schedule:\n- Sagai, Spirits & Soirée: Friday, Jan 22, 2027 (6:00 PM onwards) @ Prince Hall, NSCI, Worli\n- Baraat: Sunday, Jan 24, 2027 (11:00 AM onwards) @ The Orchid, Mumbai\n- Jaimala: Sunday, Jan 24, 2027 (12:30 PM) @ The Orchid, Mumbai\n- Wedding Ceremony & Pheras: Sunday, Jan 24, 2027 (1:00 PM onwards) @ Prive Hall, The Orchid, Mumbai\n- Reception: Sunday, Jan 24, 2027 (Evening onwards) @ Prince Hall, NSCI, Worli`);
+      const details = encodeURIComponent(`Join us to celebrate the wedding festivities of ${bride} and ${groom} in Mumbai.\n\nEvents Schedule:\n- Sagai, Spirits & Soirée: Friday, Jan 22, 2027 (6:00 PM onwards) @ Prince Hall, NSCI, Worli\n- Baraat: Sunday, Jan 24, 2027 (11:00 AM onwards) @ The Orchid, Mumbai\n- Jaimala: Sunday, Jan 24, 2027 (12:30 PM) @ The Orchid, Mumbai\n- Wedding Ceremony & Pheras: Sunday, Jan 24, 2027 (1:00 PM onwards) @ Prive Hall, The Orchid, Mumbai\n- Reception: Sunday, Jan 24, 2027 (7:00 PM onwards) @ Prive Hall, The Orchid, Mumbai`);
       const loc = encodeURIComponent(`The Orchid, Mumbai & Prince Hall, NSCI, Worli`);
 
       const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${loc}&dates=20270124T053000Z/20270124T170000Z`;
