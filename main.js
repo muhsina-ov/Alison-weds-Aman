@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     container.innerHTML = '';
     const lanternCount = 28;
-    const depthTiers = ['depth-far', 'depth-far', 'depth-mid', 'depth-mid', 'depth-near'];
+    const depthTiers = ['depth-far', 'depth-far', 'depth-far', 'depth-mid', 'depth-mid', 'depth-near'];
 
     for (let i = 0; i < lanternCount; i++) {
       const lantern = document.createElement('div');
@@ -425,9 +425,9 @@ document.addEventListener('DOMContentLoaded', () => {
     posterImg.classList.add('fade-out');
     staticCanvas.classList.remove('active');
     
-    // 3. Reset video playback to 0, slow down playback rate for grand cinematic royal pacing
+    // 3. Reset video playback to 0 and play with swift, dynamic pacing
     video.currentTime = 0;
-    video.playbackRate = 0.58; // Slower, majestic entrance
+    video.playbackRate = 1.6; // Much faster, smooth door opening
 
     const playPromise = video.play();
     if (playPromise !== undefined) {
@@ -457,8 +457,8 @@ document.addEventListener('DOMContentLoaded', () => {
       lanternsContainer.classList.add('revealed');
     }
 
-    // Trigger invitation reveal near completion of video for a grand, slow transition
-    if (!hasOpened && (video.currentTime >= 8.8 || video.ended)) {
+    // Trigger invitation reveal as doors finish opening
+    if (!hasOpened && (video.currentTime >= 5.8 || video.ended)) {
       revealInvitationContent();
     }
   });
@@ -477,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     video.pause();
     video.currentTime = 0;
-    video.playbackRate = 0.58;
+    video.playbackRate = 1.6;
     
     staticCanvas.classList.remove('active');
     invitationOverlay.classList.remove('revealed');
@@ -679,7 +679,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const groom = document.getElementById('displayGroom') ? document.getElementById('displayGroom').innerText : "Aman";
 
       const title = encodeURIComponent(`Wedding Festivities of ${bride} & ${groom}`);
-      const details = encodeURIComponent(`Join us to celebrate the wedding festivities of ${bride} and ${groom} in Mumbai.\n\nEvents Schedule:\n- Sagai, Spirits & Soirée: Friday, Jan 22, 2027 (6:00 PM onwards) @ Prince Hall, NSCI, Worli\n- Baraat: Sunday, Jan 24, 2027 (11:00 AM onwards) @ The Orchid, Mumbai\n- Jaimala: Sunday, Jan 24, 2027 (12:30 PM) @ The Orchid, Mumbai\n- Wedding Ceremony & Pheras: Sunday, Jan 24, 2027 (1:00 PM onwards) @ Prive Hall, The Orchid, Mumbai\n- Reception: Sunday, Jan 24, 2027 (7:00 PM onwards) @ Prive Hall, The Orchid, Mumbai`);
+      const details = encodeURIComponent(`Join us to celebrate the wedding festivities of ${bride} and ${groom} in Mumbai.\n\nEvents Schedule:\n- Sagai, Spirits & Soirée: Friday, Jan 22, 2027 (6:00 PM) @ Prince Hall, NSCI, Worli\n- Baraat: Sunday, Jan 24, 2027 (11:00 AM) @ The Orchid, Mumbai\n- Jaimala: Sunday, Jan 24, 2027 (12:30 PM) @ The Orchid, Mumbai\n- Wedding Ceremony & Pheras: Sunday, Jan 24, 2027 (1:00 PM) @ Prive Hall, The Orchid, Mumbai\n- Reception: Sunday, Jan 24, 2027 (7:00 PM) @ Prive Hall, The Orchid, Mumbai`);
       const loc = encodeURIComponent(`The Orchid, Mumbai & Prince Hall, NSCI, Worli`);
 
       const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${loc}&dates=20270124T053000Z/20270124T170000Z`;
